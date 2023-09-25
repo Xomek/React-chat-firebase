@@ -2,8 +2,12 @@ import cn from "classnames";
 import styles from "./Avatar.module.css";
 import { AvatarProps } from "./Avatar.types";
 
-const Avatar: React.FC<AvatarProps> = ({ className }) => {
-  return <div className={cn(styles.avatar, className)}></div>;
+const Avatar: React.FC<AvatarProps> = ({ className, imageUrl }) => {
+  return (
+    <div className={cn(styles.avatar, className)}>
+      <img src={imageUrl} alt="" />
+    </div>
+  );
 };
 
 export default Avatar;

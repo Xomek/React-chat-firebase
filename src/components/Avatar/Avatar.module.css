@@ -3,4 +3,9 @@
   height: 50px;
   border-radius: 50%;
   border: 1px solid var(--primary);
+  > img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+  }
 }

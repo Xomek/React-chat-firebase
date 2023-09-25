@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getAuth, signOut } from "firebase/auth";
-import { auth, db } from "../../../../api";
+import { auth, db, storage } from "../../../../api";
 import { addDoc, collection, onSnapshot, query } from "firebase/firestore";
 import { Button, CircularProgress } from "../../../../components/UI";
 import { Avatar } from "../../../../components";
@@ -9,6 +9,7 @@ import { Channel } from "..";
 import { useAppSelector } from "../../../../store/hooks";
 import useActions from "../../../../hooks/useActions";
 import styles from "./Sidebar.module.css";
+import { getDownloadURL, ref } from "firebase/storage";
 
 const Sidebar: React.FC = () => {
   const { currentUser } = getAuth();
@@ -16,8 +17,10 @@ const Sidebar: React.FC = () => {
   const { selectChannel } = useActions();
 
   const [channels, setChannels] = useState<ChannelType[]>([]);
+  const [url, setUrl] = useState("");
   const [loading, setLoading] = useState(false);
 
+  const storageRef = ref(storage, "images");
   const channelsCollectionRef = collection(db, "channels");
 
   useEffect(() => {
@@ -42,17 +45,21 @@ const Sidebar: React.FC = () => {
     return () => unsubscribe();
   }, []);
 
+  useEffect(() => {
+    getDownloadURL(storageRef).then((url) => setUrl(url));
+  }, []);
+
   const createChannel = () => {
     addDoc(channelsCollectionRef, {
       name: Math.floor(Math.random() * 1000000),
-      userId: currentUser?.uid
+      userId: currentUser?.uid,
     });
   };
 
   return (
     <div className={styles.sidebar}>
       <div className={styles.top}>
-        <Avatar className={styles.avatar} />
+        <Avatar className={styles.avatar} imageUrl={url} />
         <div className={styles.email}>{currentUser?.email}</div>
       </div>
 
