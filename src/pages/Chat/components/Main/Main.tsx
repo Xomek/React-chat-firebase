@@ -17,7 +17,7 @@ import cn from "classnames";
 import styles from "./Main.module.css";
 
 const Main: React.FC = () => {
-  const { selectedChannel } = useAppSelector((state) => state.chat);
+  const { selectedChannel } = useAppSelector((state) => state.channels);
 
   const { currentUser } = getAuth();
 

@@ -5,7 +5,7 @@ import { AvatarProps } from "./Avatar.types";
 const Avatar: React.FC<AvatarProps> = ({ className, imageUrl }) => {
   return (
     <div className={cn(styles.avatar, className)}>
-      <img src={imageUrl} alt="" />
+      {imageUrl && <img src={imageUrl} alt="logo" />}
     </div>
   );
 };

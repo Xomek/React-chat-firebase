@@ -11,7 +11,7 @@ import styles from "./Channel.module.css";
 
 const Channel: React.FC<ChannelProps> = ({ channel }) => {
   const { selectChannel } = useActions();
-  const { selectedChannel } = useAppSelector((state) => state.chat);
+  const { selectedChannel } = useAppSelector((state) => state.channels);
   const { currentUser } = getAuth();
 
   const isActive = channel.id === selectedChannel?.id;

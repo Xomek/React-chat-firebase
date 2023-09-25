@@ -8,7 +8,7 @@ import styles from "./Textarea.module.css";
 const Textarea: React.FC = () => {
   const { currentUser } = getAuth();
 
-  const { selectedChannel } = useAppSelector((state) => state.chat);
+  const { selectedChannel } = useAppSelector((state) => state.channels);
   const [newMessage, setNewMessage] = useState("");
   const messagesCollectionRef = collection(db, "messages");
 
