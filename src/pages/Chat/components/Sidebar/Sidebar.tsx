@@ -33,16 +33,18 @@ const Sidebar: React.FC = () => {
         channels.push({ ...doc.data(), id: doc.id });
       });
 
-      if (!channels.find((channel) => channel.id === selectedChannel?.id)) {
-        selectChannel(null);
-      }
-
       setChannels(channels);
       setLoading(false);
     });
 
     return () => unsubscribe();
   }, []);
+
+  useEffect(() => {
+    if (!channels.find((channel) => channel.id === selectedChannel?.id)) {
+      selectChannel(null);
+    }
+  }, [channels]);
 
   useEffect(() => {
     if (currentUser) {
