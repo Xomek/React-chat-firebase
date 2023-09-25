@@ -1,5 +1,11 @@
 import { getAuth } from "firebase/auth";
-import { collection, query, where, onSnapshot } from "firebase/firestore";
+import {
+  collection,
+  query,
+  where,
+  onSnapshot,
+  orderBy,
+} from "firebase/firestore";
 import { useState, useEffect } from "react";
 import { Message } from "..";
 import { db } from "../../../../api";
@@ -26,7 +32,8 @@ const Main: React.FC = () => {
 
       const q = query(
         messagesCollectionRef,
-        where("channelId", "==", selectedChannel.id)
+        where("channelId", "==", selectedChannel.id),
+        orderBy("createdAt", "asc")
       );
 
       const unsubscribe = onSnapshot(q, (querySnapshot) => {

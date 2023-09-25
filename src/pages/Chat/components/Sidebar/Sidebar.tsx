@@ -6,10 +6,14 @@ import { Button, CircularProgress } from "../../../../components/UI";
 import { Avatar } from "../../../../components";
 import { ChannelType } from "../../../../types";
 import { Channel } from "..";
+import { useAppSelector } from "../../../../store/hooks";
+import useActions from "../../../../hooks/useActions";
 import styles from "./Sidebar.module.css";
 
 const Sidebar: React.FC = () => {
   const { currentUser } = getAuth();
+  const { selectedChannel } = useAppSelector((state) => state.chat);
+  const { selectChannel } = useActions();
 
   const [channels, setChannels] = useState<ChannelType[]>([]);
   const [loading, setLoading] = useState(false);
@@ -27,6 +31,10 @@ const Sidebar: React.FC = () => {
         channels.push({ ...doc.data(), id: doc.id });
       });
 
+      if (!channels.find((channel) => channel.id === selectedChannel?.id)) {
+        selectChannel(null);
+      }
+      
       setChannels(channels);
       setLoading(false);
     });

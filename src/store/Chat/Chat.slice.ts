@@ -14,7 +14,7 @@ const chatSlice = createSlice({
   name: "chat",
   initialState,
   reducers: {
-    selectChannel(state, action: PayloadAction<ChannelType>) {
+    selectChannel(state, action: PayloadAction<ChannelType | null>) {
       state.selectedChannel = action.payload;
     },
   },
