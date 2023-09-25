@@ -34,7 +34,7 @@ const Sidebar: React.FC = () => {
       if (!channels.find((channel) => channel.id === selectedChannel?.id)) {
         selectChannel(null);
       }
-      
+
       setChannels(channels);
       setLoading(false);
     });
@@ -45,6 +45,7 @@ const Sidebar: React.FC = () => {
   const createChannel = () => {
     addDoc(channelsCollectionRef, {
       name: Math.floor(Math.random() * 1000000),
+      userId: currentUser?.uid
     });
   };
 

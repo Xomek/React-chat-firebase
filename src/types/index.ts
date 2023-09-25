@@ -2,6 +2,7 @@ import { Timestamp } from "firebase/firestore";
 
 export interface ChannelType {
   id: string;
+  userId: string;
   name: string;
 }
 

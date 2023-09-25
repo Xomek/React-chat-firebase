@@ -31,3 +31,12 @@
   height: 35px;
   margin-right: 20px;
 }
+
+.name {
+  text-align: left;
+  flex: 1;
+}
+
+.trashIcon {
+  width: 18px;
+}

@@ -8,6 +8,7 @@
   color: var(--primary);
   border-radius: 10px;
   word-break: break-all;
+  max-width: 45%;
 }
 
 .text {
