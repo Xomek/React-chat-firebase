@@ -48,7 +48,9 @@ const Sidebar: React.FC = () => {
       </div>
 
       <div className={styles.actions}>
-        <div className={styles.plusIcon} onClick={createChannel} />
+        <Button onClick={createChannel}>
+          <div className={styles.plusIcon} />
+        </Button>
       </div>
 
       {loading ? (

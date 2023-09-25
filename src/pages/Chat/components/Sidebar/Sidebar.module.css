@@ -54,12 +54,11 @@
 
 .plusIcon {
   position: relative;
+  left: 50%;
+  transform: translateX(-50%);
   width: 20px;
   height: 20px;
   cursor: pointer;
-  text-align: center;
-  margin: 0 auto;
-  padding: 10px 0;
   margin-bottom: 20px;
 
   &::after,
