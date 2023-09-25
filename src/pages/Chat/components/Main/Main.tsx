@@ -8,10 +8,10 @@ import {
 } from "firebase/firestore";
 import { useState, useEffect } from "react";
 import { Message } from "..";
-import { db } from "../../../../api";
-import CircilarProgress from "../../../../components/UI/CircilarProgress";
-import { useAppSelector } from "../../../../store/hooks";
-import { MessageType } from "../../../../types";
+import { db } from "api";
+import CircilarProgress from "components/UI/CircilarProgress";
+import { useAppSelector } from "store/hooks";
+import { MessageType } from "types";
 import { Textarea } from "./components";
 import cn from "classnames";
 import styles from "./Main.module.css";

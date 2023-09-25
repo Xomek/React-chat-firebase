@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { getAuth, signOut } from "firebase/auth";
-import { auth, db } from "../../../../api";
+import { auth, db } from "api";
 import { addDoc, collection, onSnapshot, query } from "firebase/firestore";
-import { Button, CircularProgress } from "../../../../components/UI";
-import { Avatar } from "../../../../components";
-import { ChannelType } from "../../../../types";
+import { Button, CircularProgress } from "components/UI";
+import { Avatar } from "components";
+import { ChannelType } from "types";
 import { Channel } from "..";
-import { useAppSelector } from "../../../../store/hooks";
-import useActions from "../../../../hooks/useActions";
+import { useAppSelector } from "store/hooks";
+import useActions from "hooks/useActions";
 import styles from "./Sidebar.module.css";
 
 const Sidebar: React.FC = () => {

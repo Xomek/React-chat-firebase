@@ -1,10 +1,10 @@
 import { ChannelProps } from "./Channel.types";
-import useActions from "../../../../hooks/useActions";
-import { useAppSelector } from "../../../../store/hooks";
-import { Avatar } from "../../../../components";
-import TrashIcon from "../../../../assets/icons/trash.svg";
+import useActions from "hooks/useActions";
+import { useAppSelector } from "store/hooks";
+import { Avatar } from "components";
+import TrashIcon from "assets/icons/trash.svg";
 import { deleteDoc, doc } from "firebase/firestore";
-import { db } from "../../../../api";
+import { db } from "api";
 import { getAuth } from "firebase/auth";
 import cn from "classnames";
 import styles from "./Channel.module.css";

@@ -1,7 +1,7 @@
 import { useAuthType } from "./useAuthType";
-import { Button, TextField } from "../../components/UI";
-import { CircularProgress } from "../../components/UI";
-import { storage } from "../../api";
+import { Button, TextField } from "components/UI";
+import { CircularProgress } from "components/UI";
+import { storage } from "api";
 import { ref, uploadBytes } from "firebase/storage";
 import { useEffect, useState } from "react";
 import styles from "./Auth.module.css";

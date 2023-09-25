@@ -1,8 +1,8 @@
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { useState } from "react";
-import { db } from "../../../../../../api";
+import { db } from "api";
 import { getAuth } from "firebase/auth";
-import { useAppSelector } from "../../../../../../store/hooks";
+import { useAppSelector } from "store/hooks";
 import styles from "./Textarea.module.css";
 
 const Textarea: React.FC = () => {
