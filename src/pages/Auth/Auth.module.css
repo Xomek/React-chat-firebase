@@ -1,0 +1,43 @@
+.page {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  padding: 0px 60px;
+  height: 400px;
+  width: 400px;
+  background-color: var(--primary);
+  box-shadow: 0px 5px 10px 0px var(--primary-shadow);
+  border-radius: 8px;
+
+  > input,
+  button {
+    width: 100%;
+  }
+}
+
+.button {
+  position: relative;
+}
+
+.title {
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 40px;
+  color: white;
+}
+
+.loader {
+  top: 5px;
+  right: 50%;
+  transform: translateX(50%);
+  position: absolute;
+}

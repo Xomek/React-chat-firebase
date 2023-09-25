@@ -1,0 +1,33 @@
+.channel {
+  padding: 10px 20px;
+  border-bottom: 1px solid var(--primary);
+  color: var(--primary);
+  text-align: center;
+  letter-spacing: 1px;
+  font-size: 18px;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+
+  &:hover {
+    background-color: var(--primary-shadow);
+    color: #f3f2f1;
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+}
+
+.active {
+  background-color: var(--primary-shadow);
+  color: #f3f2f1;
+  &:hover {
+    background-color: var(--primary-shadow);
+    color: #f3f2f1;
+  }
+}
+
+.avatar {
+  width: 35px;
+  height: 35px;
+  margin-right: 20px;
+}

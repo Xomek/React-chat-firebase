@@ -1,0 +1,14 @@
+.circularProgress {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 5px solid #ccc;
+  border-top-color: var(--primary);
+  animation: spin 0.5s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

@@ -1,0 +1,18 @@
+.textAreaBox {
+  padding: 20px;
+  width: 100%;
+}
+
+.textarea {
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 18px;
+  color: var(--primary);
+  width: 100%;
+  outline: none;
+  border: none;
+
+  &::placeholder {
+    color: var(--primary-shadow);
+  }
+}

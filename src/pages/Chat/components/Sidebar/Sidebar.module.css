@@ -1,0 +1,78 @@
+.sidebar {
+  height: 100%;
+  width: 300px;
+  background-color: white;
+  display: flex;
+  flex-shrink: 0;
+  flex-direction: column;
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid var(--primary);
+}
+
+.avatar {
+  flex-shrink: 0;
+  margin-right: 15px;
+}
+
+.email {
+  letter-spacing: 1px;
+  font-size: 18px;
+  color: var(--primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.channels {
+  flex: 1;
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--primary-shadow);
+    border-radius: 12px;
+  }
+  overflow: auto;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid var(--primary);
+}
+
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+}
+
+.plusIcon {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  text-align: center;
+  margin: 0 auto;
+  padding: 10px 0;
+  margin-bottom: 20px;
+
+  &::after,
+  &::before {
+    content: "";
+    border-radius: 4px;
+    width: 3px;
+    height: 100%;
+    position: absolute;
+    background-color: var(--primary);
+  }
+
+  &::after {
+    transform: rotate(90deg);
+  }
+}

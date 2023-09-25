@@ -1,0 +1,9 @@
+.chat {
+  display: flex;
+  width: 1000px;
+  height: 700px;
+  background-color: var(--primary);
+  border-radius: 8px;
+  box-shadow: 0px 5px 10px 0px var(--primary-shadow);
+  overflow: hidden;
+}
