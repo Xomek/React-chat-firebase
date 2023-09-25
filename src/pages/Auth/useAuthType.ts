@@ -4,7 +4,8 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-import { auth } from "../../api";
+import { auth, storage } from "../../api";
+import { ref, uploadBytes } from "firebase/storage";
 
 export const useAuthType = () => {
   const [state, setState] = useState<AuthForm>({
@@ -12,6 +13,7 @@ export const useAuthType = () => {
     password: "",
   });
 
+  const [file, setFile] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
 
   const [type, setType] = useState<AuthType>("login");
@@ -36,11 +38,14 @@ export const useAuthType = () => {
       ? signInWithEmailAndPassword(auth, state.email, state.password).finally(
           () => setLoading(false)
         )
-      : createUserWithEmailAndPassword(
-          auth,
-          state.email,
-          state.password
-        ).finally(() => setLoading(false));
+      : createUserWithEmailAndPassword(auth, state.email, state.password)
+          .then((data) => {
+            if (file) {
+              const storageRef = ref(storage, `images/${data.user.uid}`);
+              uploadBytes(storageRef, file);
+            }
+          })
+          .finally(() => setLoading(false));
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -50,6 +55,10 @@ export const useAuthType = () => {
     setState((prevState) => ({ ...prevState, [name]: value }));
   };
 
+  const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) setFile(e.target.files[0]);
+  };
+
   return {
     state,
     isLoginType,
@@ -57,5 +66,6 @@ export const useAuthType = () => {
     handleSubmit,
     loading,
     handleChange,
+    handleFile,
   };
 };

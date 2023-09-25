@@ -1,11 +1,7 @@
 import { useAuthType } from "./useAuthType";
 import { Button, TextField } from "components/UI";
 import { CircularProgress } from "components/UI";
-import { storage } from "api";
-import { ref, uploadBytes } from "firebase/storage";
-import { useEffect, useState } from "react";
 import styles from "./Auth.module.css";
-import { getAuth } from "firebase/auth";
 
 const Auth: React.FC = () => {
   const {
@@ -15,24 +11,8 @@ const Auth: React.FC = () => {
     handleSubmit,
     handleChange,
     loading,
+    handleFile
   } = useAuthType();
-
-  const { currentUser } = getAuth();
-
-  const [file, setFile] = useState<File | null>(null);
-
-  useEffect(() => {
-    if (file) {
-      console.log(currentUser);
-      const storageRef = ref(storage, `images/${currentUser?.uid}`);
-
-      uploadBytes(storageRef, file);
-    }
-  }, [file, currentUser]);
-
-  const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) setFile(e.target.files[0]);
-  };
 
   return (
     <div className={styles.page}>
