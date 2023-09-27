@@ -1,10 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
-import channelsReducer from "./Channels/Channels.slice";
-import messagesReducer from "./Messages/Messages.slice";
+import $api from "api";
+import chatReducer from "./Chat/Chat.slice";
 
 export const store = configureStore({
   reducer: {
-    channels: channelsReducer,
-    messages: messagesReducer,
+    chat: chatReducer,
+    [$api.reducerPath]: $api.reducer,
   },
+
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({ serializableCheck: false }).concat($api.middleware),
 });

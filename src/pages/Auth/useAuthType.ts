@@ -4,8 +4,8 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-import { auth, storage } from "../../api";
 import { ref, uploadBytes } from "firebase/storage";
+import { auth, storage } from "utils/firebase";
 
 export const useAuthType = () => {
   const [state, setState] = useState<AuthForm>({

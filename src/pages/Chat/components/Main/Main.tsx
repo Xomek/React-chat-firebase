@@ -1,50 +1,26 @@
 import { getAuth } from "firebase/auth";
-import {
-  collection,
-  query,
-  where,
-  onSnapshot,
-  orderBy,
-} from "firebase/firestore";
-import { useState, useEffect } from "react";
 import { Message } from "..";
-import { db } from "api";
 import CircilarProgress from "components/UI/CircilarProgress";
 import { useAppSelector } from "store/hooks";
-import { MessageType } from "types";
 import { Textarea } from "./components";
+import { useGetChannelMessagesQuery } from "api/Chat/Chat.api";
+import { query, collection, onSnapshot } from "firebase/firestore";
+import { useEffect } from "react";
+import { db } from "utils/firebase";
 import cn from "classnames";
 import styles from "./Main.module.css";
 
 const Main: React.FC = () => {
-  const { selectedChannel } = useAppSelector((state) => state.channels);
-
   const { currentUser } = getAuth();
-
-  const [messages, setMessages] = useState<MessageType[]>([]);
-  const [loading, setLoading] = useState(false);
-
-  const messagesCollectionRef = collection(db, "messages");
+  const { selectedChannel } = useAppSelector((state) => state.chat);
+  const { data, isLoading, refetch } = useGetChannelMessagesQuery(
+    selectedChannel?.id
+  );
 
   useEffect(() => {
     if (selectedChannel) {
-      setLoading(true);
-
-      const q = query(
-        messagesCollectionRef,
-        where("channelId", "==", selectedChannel.id),
-        orderBy("createdAt", "asc")
-      );
-
-      const unsubscribe = onSnapshot(q, (querySnapshot) => {
-        const messages: any[] = [];
-        querySnapshot.forEach((doc) => {
-          messages.push({ ...doc.data(), id: doc.id });
-        });
-
-        setMessages(messages);
-        setLoading(false);
-      });
+      const q = query(collection(db, "messages"));
+      const unsubscribe = onSnapshot(q, () => refetch());
 
       return () => unsubscribe();
     }
@@ -56,15 +32,15 @@ const Main: React.FC = () => {
         <div className={styles.main}>
           <div className={styles.channelName}>{selectedChannel.name}</div>
 
-          {loading ? (
+          {isLoading ? (
             <div className={styles.loader}>
               <CircilarProgress />
             </div>
           ) : (
             <div className={styles.scroll}>
               <div className={styles.messages}>
-                {messages.length ? (
-                  messages.map((message) => (
+                {data?.length ? (
+                  data?.map((message) => (
                     <Message
                       key={message.id}
                       className={cn(styles.message, {

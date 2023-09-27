@@ -1,7 +1,7 @@
 import { Auth, Chat } from "./pages";
 import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "./api";
 import { useEffect, useState } from "react";
+import { auth } from "utils/firebase";
 
 function App() {
   const [user, setUser] = useState<any>();

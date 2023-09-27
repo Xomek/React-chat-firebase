@@ -3,22 +3,21 @@ import useActions from "hooks/useActions";
 import { useAppSelector } from "store/hooks";
 import { Avatar } from "components";
 import TrashIcon from "assets/icons/trash.svg";
-import { deleteDoc, doc } from "firebase/firestore";
-import { db } from "api";
 import { getAuth } from "firebase/auth";
+import { useDeleteChannelMutation } from "api/Chat/Chat.api";
 import cn from "classnames";
 import styles from "./Channel.module.css";
 
 const Channel: React.FC<ChannelProps> = ({ channel }) => {
-  const { selectChannel } = useActions();
-  const { selectedChannel } = useAppSelector((state) => state.channels);
   const { currentUser } = getAuth();
+  const { selectChannel } = useActions();
+  const { selectedChannel } = useAppSelector((state) => state.chat);
+  const [deleteChannel] = useDeleteChannelMutation();
 
   const isActive = channel.id === selectedChannel?.id;
 
-  const deleteChannel = async () => {
-    const channelDoc = doc(db, "channels", channel.id);
-    await deleteDoc(channelDoc);
+  const handleDeleteChannel = async () => {
+    deleteChannel(channel.id);
   };
 
   return (
@@ -33,7 +32,7 @@ const Channel: React.FC<ChannelProps> = ({ channel }) => {
           className={styles.trashIcon}
           src={TrashIcon}
           alt="trashIcon"
-          onClick={deleteChannel}
+          onClick={handleDeleteChannel}
         />
       )}
     </div>

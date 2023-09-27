@@ -3,20 +3,8 @@ import { Avatar } from "components";
 import { format } from "date-fns";
 import cn from "classnames";
 import styles from "./Message.module.css";
-import { storage } from "api";
-import { ref, getDownloadURL } from "firebase/storage";
-import { useEffect, useState } from "react";
 
-const Message: React.FC<MessageProps> = ({ className, message }) => {
-  const [url, setUrl] = useState("");
-
-  useEffect(() => {
-    if (message.userId) {
-      const storageRef = ref(storage, `images/${message.userId}`);
-      getDownloadURL(storageRef).then((url) => setUrl(url));
-    }
-  }, [message]);
-
+const Message: React.FC<MessageProps> = ({ className, message, avatarUrl }) => {
   return (
     <div className={cn(styles.message, className)}>
       <div className={styles.text}>
@@ -27,7 +15,7 @@ const Message: React.FC<MessageProps> = ({ className, message }) => {
         </div>
         {message.text}
       </div>
-      <Avatar className={styles.avatar} imageUrl={url} />
+      <Avatar className={styles.avatar} imageUrl={avatarUrl} />
     </div>
   );
 };

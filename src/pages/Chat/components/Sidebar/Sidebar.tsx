@@ -1,50 +1,41 @@
 import { useEffect, useState } from "react";
+import { collection, onSnapshot, query } from "firebase/firestore";
 import { getAuth, signOut } from "firebase/auth";
-import { auth, db, storage } from "api";
-import { addDoc, collection, onSnapshot, query } from "firebase/firestore";
 import { Button, CircularProgress } from "components/UI";
 import { Avatar } from "components";
-import { ChannelType } from "types";
 import { Channel } from "..";
+import { auth, db, storage } from "utils/firebase";
 import { useAppSelector } from "store/hooks";
 import useActions from "hooks/useActions";
+import {
+  useCreateChannelMutation,
+  useGetChannelsQuery,
+} from "api/Chat/Chat.api";
+import { ref, getDownloadURL } from "firebase/storage";
 import styles from "./Sidebar.module.css";
-import { getDownloadURL, ref } from "firebase/storage";
 
 const Sidebar: React.FC = () => {
   const { currentUser } = getAuth();
-  const { selectedChannel } = useAppSelector((state) => state.channels);
   const { selectChannel } = useActions();
-
-  const [channels, setChannels] = useState<ChannelType[]>([]);
-  const [loading, setLoading] = useState(false);
+  const { selectedChannel } = useAppSelector((state) => state.chat);
+  const { data, isLoading, refetch } = useGetChannelsQuery();
+  const [createChannel] = useCreateChannelMutation();
   const [url, setUrl] = useState("");
-
-  const channelsCollectionRef = collection(db, "channels");
 
   useEffect(() => {
     const q = query(collection(db, "channels"));
-
-    setLoading(true);
-
-    const unsubscribe = onSnapshot(q, (querySnapshot) => {
-      const channels: any[] = [];
-      querySnapshot.forEach((doc) => {
-        channels.push({ ...doc.data(), id: doc.id });
-      });
-
-      setChannels(channels);
-      setLoading(false);
-    });
+    const unsubscribe = onSnapshot(q, () => refetch());
 
     return () => unsubscribe();
   }, []);
 
   useEffect(() => {
-    if (!channels.find((channel) => channel.id === selectedChannel?.id)) {
-      selectChannel(null);
+    if (data) {
+      if (!data.find((channel) => channel.id === selectedChannel?.id)) {
+        selectChannel(null);
+      }
     }
-  }, [channels]);
+  }, [data]);
 
   useEffect(() => {
     if (currentUser) {
@@ -53,8 +44,8 @@ const Sidebar: React.FC = () => {
     }
   }, [currentUser]);
 
-  const createChannel = () => {
-    addDoc(channelsCollectionRef, {
+  const handleCreateChannel = () => {
+    createChannel({
       name: Math.floor(Math.random() * 1000000),
       userId: currentUser?.uid,
     });
@@ -68,18 +59,18 @@ const Sidebar: React.FC = () => {
       </div>
 
       <div className={styles.actions}>
-        <Button onClick={createChannel}>
+        <Button onClick={handleCreateChannel}>
           <div className={styles.plusIcon} />
         </Button>
       </div>
 
-      {loading ? (
+      {isLoading ? (
         <div className={styles.loader}>
           <CircularProgress />
         </div>
       ) : (
         <div className={styles.channels}>
-          {channels?.map((channel) => (
+          {data?.map((channel) => (
             <Channel key={channel.id} channel={channel} />
           ))}
         </div>

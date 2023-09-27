@@ -1,16 +1,13 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { ChannelsState } from "./Channels.types";
+import { ChannelsState } from "./Chat.types";
 import { ChannelType } from "../../types";
 
 const initialState: ChannelsState = {
-  channels: [],
   selectedChannel: null,
-  loading: false,
-  error: "",
 };
 
-const channelsSlice = createSlice({
-  name: "channels",
+const chatSlice = createSlice({
+  name: "chat",
   initialState,
   reducers: {
     selectChannel(state, action: PayloadAction<ChannelType | null>) {
@@ -19,5 +16,5 @@ const channelsSlice = createSlice({
   },
 });
 
-export const channelsActions = channelsSlice.actions;
-export default channelsSlice.reducer;
+export const chatActions = chatSlice.actions;
+export default chatSlice.reducer;

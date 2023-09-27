@@ -1,24 +1,21 @@
-import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { useState } from "react";
-import { db } from "api";
 import { getAuth } from "firebase/auth";
+import { useCreateNewMessageMutation } from "api/Chat/Chat.api";
 import { useAppSelector } from "store/hooks";
 import styles from "./Textarea.module.css";
 
 const Textarea: React.FC = () => {
   const { currentUser } = getAuth();
-
-  const { selectedChannel } = useAppSelector((state) => state.channels);
+  const { selectedChannel } = useAppSelector((state) => state.chat);
   const [newMessage, setNewMessage] = useState("");
-  const messagesCollectionRef = collection(db, "messages");
+  const [createNewMessage] = useCreateNewMessageMutation();
 
-  const sendMessage = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleCreateMessage = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      addDoc(messagesCollectionRef, {
+      createNewMessage({
         userId: currentUser?.uid,
         channelId: selectedChannel?.id,
         text: newMessage,
-        createdAt: serverTimestamp(),
       });
 
       setNewMessage("");
@@ -31,7 +28,7 @@ const Textarea: React.FC = () => {
         className={styles.textarea}
         value={newMessage}
         onChange={(e) => setNewMessage(e.target.value)}
-        onKeyDown={sendMessage}
+        onKeyDown={handleCreateMessage}
         type="text"
         placeholder="Введите ваше сообщение"
       />

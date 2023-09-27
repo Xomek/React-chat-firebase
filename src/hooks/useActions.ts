@@ -1,11 +1,9 @@
-import { useAppDispatch } from "../store/hooks";
+import { useAppDispatch } from "store/hooks";
 import { bindActionCreators } from "@reduxjs/toolkit";
-import { channelsActions } from "../store/Channels/Channels.slice";
-import { messagesActions } from "../store/Messages/Messages.slice";
+import { chatActions } from "store/Chat/Chat.slice";
 
 const AllActions = {
-  ...channelsActions,
-  ...messagesActions,
+  ...chatActions,
 };
 
 const useActions = () => {
