@@ -3,7 +3,7 @@ import { collection, onSnapshot, query } from "firebase/firestore";
 import { getAuth, signOut } from "firebase/auth";
 import { Button, CircularProgress } from "components/UI";
 import { Avatar } from "components";
-import { Channel } from "..";
+import { Channel } from "./components";
 import { auth, db, storage } from "utils/firebase";
 import { useAppSelector } from "store/hooks";
 import useActions from "hooks/useActions";

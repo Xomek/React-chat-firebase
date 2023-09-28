@@ -1,8 +1,7 @@
 import { getAuth } from "firebase/auth";
-import { Message } from "..";
 import CircilarProgress from "components/UI/CircilarProgress";
 import { useAppSelector } from "store/hooks";
-import { Textarea } from "./components";
+import { Message, Textarea } from "./components";
 import { useGetChannelMessagesQuery } from "api/Chat/Chat.api";
 import { query, collection, onSnapshot } from "firebase/firestore";
 import { useEffect } from "react";
