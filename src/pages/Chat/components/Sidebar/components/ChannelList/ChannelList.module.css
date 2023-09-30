@@ -1,0 +1,11 @@
+.channels {
+  flex: 1;
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--primary-shadow);
+    border-radius: 12px;
+  }
+  overflow: auto;
+}

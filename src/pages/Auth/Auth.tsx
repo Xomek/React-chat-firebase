@@ -11,7 +11,8 @@ const Auth: React.FC = () => {
     handleSubmit,
     handleChange,
     loading,
-    handleFile
+    errors,
+    handleFile,
   } = useAuthType();
 
   return (
@@ -24,6 +25,7 @@ const Auth: React.FC = () => {
           value={state.email}
           onChange={handleChange}
           placeholder="Почта"
+          error={errors?.email}
         />
         <TextField
           type="password"
@@ -31,6 +33,7 @@ const Auth: React.FC = () => {
           value={state.password}
           onChange={handleChange}
           placeholder="Пароль"
+          error={errors?.password}
         />
 
         {!isLoginType && <input type="file" onChange={handleFile} />}

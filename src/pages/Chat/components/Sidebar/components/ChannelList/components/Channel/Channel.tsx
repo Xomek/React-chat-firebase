@@ -1,9 +1,9 @@
 import { ChannelProps } from "./Channel.types";
 import useActions from "hooks/useActions";
 import { useAppSelector } from "store/hooks";
-import { Avatar } from "components";
 import TrashIcon from "assets/icons/trash.svg";
 import { getAuth } from "firebase/auth";
+import { Avatar } from "components/UI";
 import { useDeleteChannelMutation } from "api/Chat/Chat.api";
 import cn from "classnames";
 import styles from "./Channel.module.css";

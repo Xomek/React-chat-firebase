@@ -1,3 +1,3 @@
-import Channel from "./Channel";
+import ChannelList from "./ChannelList";
 
-export { Channel };
+export { ChannelList };

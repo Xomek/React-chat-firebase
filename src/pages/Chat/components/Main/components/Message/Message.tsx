@@ -1,5 +1,5 @@
 import { MessageProps } from "./Message.types";
-import { Avatar } from "components";
+import { Avatar } from "components/UI";
 import { format } from "date-fns";
 import cn from "classnames";
 import styles from "./Message.module.css";

@@ -4,3 +4,8 @@ export interface AuthForm {
 }
 
 export type AuthType = "registration" | "login";
+
+export interface AuthValidation {
+  email: boolean;
+  password: boolean;
+}

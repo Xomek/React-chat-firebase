@@ -2,10 +2,20 @@
   padding: 10px 15px;
   font-size: 18px;
   border-radius: 4px;
-  border: none;
+  border: 1px solid transparent;
   outline: none;
   color: var(--primary);
   &::placeholder {
     color: var(--primary-shadow);
+  }
+}
+
+.error {
+  &.input {
+    border-color: red;
+    color: red;
+    &::placeholder {
+      color: red;
+    }
   }
 }

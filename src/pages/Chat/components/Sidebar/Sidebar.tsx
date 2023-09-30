@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 import { collection, onSnapshot, query } from "firebase/firestore";
 import { getAuth, signOut } from "firebase/auth";
 import { Button, CircularProgress } from "components/UI";
-import { Avatar } from "components";
-import { Channel } from "./components";
+import { Avatar } from "components/UI";
 import { auth, db, storage } from "utils/firebase";
 import { useAppSelector } from "store/hooks";
 import useActions from "hooks/useActions";
+import ChannelList from "./components/ChannelList/ChannelList";
 import {
   useCreateChannelMutation,
   useGetChannelsQuery,
@@ -69,11 +69,7 @@ const Sidebar: React.FC = () => {
           <CircularProgress />
         </div>
       ) : (
-        <div className={styles.channels}>
-          {data?.map((channel) => (
-            <Channel key={channel.id} channel={channel} />
-          ))}
-        </div>
+        <ChannelList />
       )}
 
       <Button onClick={() => signOut(auth)}>Выход</Button>
