@@ -12,9 +12,12 @@ import {
   useGetChannelsQuery,
 } from "api/Chat/Chat.api";
 import { ref, getDownloadURL } from "firebase/storage";
+import { ROUTES } from "routes/routes.enum";
+import { useNavigate } from "react-router-dom";
 import styles from "./Sidebar.module.css";
 
 const Sidebar: React.FC = () => {
+  const navigate = useNavigate();
   const { currentUser } = getAuth();
   const { selectChannel } = useActions();
   const { selectedChannel } = useAppSelector((state) => state.chat);
@@ -51,6 +54,11 @@ const Sidebar: React.FC = () => {
     });
   };
 
+  const handleSignOut = async () => {
+    await signOut(auth);
+    navigate(ROUTES.AUTH);
+  };
+
   return (
     <div className={styles.sidebar}>
       <div className={styles.top}>
@@ -72,7 +80,7 @@ const Sidebar: React.FC = () => {
         <ChannelList />
       )}
 
-      <Button onClick={() => signOut(auth)}>Выход</Button>
+      <Button onClick={handleSignOut}>Выход</Button>
     </div>
   );
 };

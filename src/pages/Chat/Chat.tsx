@@ -3,9 +3,11 @@ import styles from "./Chat.module.css";
 
 const Chat: React.FC = () => {
   return (
-    <div className={styles.chat}>
-      <Sidebar />
-      <Main />
+    <div className="app">
+      <div className={styles.chat}>
+        <Sidebar />
+        <Main />
+      </div>
     </div>
   );
 };

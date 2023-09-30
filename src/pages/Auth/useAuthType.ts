@@ -1,15 +1,19 @@
-import { useState } from "react";
-import { AuthForm, AuthType, AuthValidation } from "./Auth.types";
+import { useEffect, useState } from "react";
+import { AuthForm, AuthType } from "./Auth.types";
 import {
   createUserWithEmailAndPassword,
+  onAuthStateChanged,
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { ref, uploadBytes } from "firebase/storage";
 import { auth, storage } from "utils/firebase";
 import { authSchema } from "./Auth.schema";
 import { ValidationError } from "yup";
+import { useNavigate } from "react-router-dom";
+import { ROUTES } from "routes/routes.enum";
 
 export const useAuthType = () => {
+  const navigate = useNavigate();
   const [state, setState] = useState<AuthForm>({
     email: "",
     password: "",
@@ -21,6 +25,17 @@ export const useAuthType = () => {
 
   const [type, setType] = useState<AuthType>("login");
   const isLoginType = type === "login";
+
+  useEffect(() => {
+    const authListen = onAuthStateChanged(
+      auth,
+      (user) => user && navigate(ROUTES.CHAT)
+    );
+
+    return () => {
+      authListen();
+    };
+  }, []);
 
   const handleAuthType = () => {
     if (isLoginType) {
