@@ -5,6 +5,8 @@ import TrashIcon from "assets/icons/trash.svg";
 import { getAuth } from "firebase/auth";
 import { Avatar } from "components/UI";
 import { useDeleteChannelMutation } from "api/Chat/Chat.api";
+import { ConfirmDialog } from "components/UI/index";
+import { useState } from "react";
 import cn from "classnames";
 import styles from "./Channel.module.css";
 
@@ -13,12 +15,9 @@ const Channel: React.FC<ChannelProps> = ({ channel }) => {
   const { selectChannel } = useActions();
   const { selectedChannel } = useAppSelector((state) => state.chat);
   const [deleteChannel] = useDeleteChannelMutation();
+  const [confirmDialog, setConfirmDialog] = useState(false);
 
   const isActive = channel.id === selectedChannel?.id;
-
-  const handleDeleteChannel = async () => {
-    deleteChannel(channel.id);
-  };
 
   return (
     <div
@@ -32,7 +31,14 @@ const Channel: React.FC<ChannelProps> = ({ channel }) => {
           className={styles.trashIcon}
           src={TrashIcon}
           alt="trashIcon"
-          onClick={handleDeleteChannel}
+          onClick={() => setConfirmDialog(true)}
+        />
+      )}
+
+      {confirmDialog && (
+        <ConfirmDialog
+          close={() => setConfirmDialog(false)}
+          cb={() => deleteChannel(channel.id)}
         />
       )}
     </div>
