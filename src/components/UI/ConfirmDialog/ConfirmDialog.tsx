@@ -1,5 +1,6 @@
 import { Modal, Button } from "components/UI";
 import { ConfirmDialogProps } from "./ConfirmDialog.types";
+import styles from "./ConfirmDIalog.module.css";
 
 const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
   children,
@@ -14,9 +15,12 @@ const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
   };
   return (
     <Modal>
-      {children}
-      <Button onClick={handleOk}>{confirmText}</Button>
-      <Button onClick={close}>{denyText}</Button>
+      {children || <div className={styles.text}>Вы уверены?</div>}
+
+      <div className={styles.buttons}>
+        <Button onClick={handleOk}>{confirmText}</Button>
+        <Button onClick={close}>{denyText}</Button>
+      </div>
     </Modal>
   );
 };
