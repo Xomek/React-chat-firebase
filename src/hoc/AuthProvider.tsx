@@ -1,15 +1,7 @@
-import { getAuth } from "firebase/auth";
-import { Navigate, Outlet } from "react-router-dom";
-import { ROUTES } from "routes/routes.enum";
+import { Outlet } from "react-router-dom";
 
 const AuthProvider: React.FC = () => {
-  const { currentUser } = getAuth();
-
-  if (currentUser) {
-    return <Outlet />;
-  } else {
-    return <Navigate to={ROUTES.AUTH} />;
-  }
+  return <Outlet />;
 };
 
 export default AuthProvider;
