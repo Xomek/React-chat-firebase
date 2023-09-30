@@ -29,16 +29,18 @@ export const useAuthType = () => {
       setType("login");
     }
 
+    setErorrs(null);
     setState({ email: "", password: "" });
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const validation = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     authSchema
       .validate(state, { abortEarly: false })
       .then(() => {
         setErorrs(null);
+        handleSubmit();
       })
       .catch((err: ValidationError) => {
         const newErrors = {} as any;
@@ -51,23 +53,23 @@ export const useAuthType = () => {
 
         setErorrs(newErrors);
       });
+  };
 
-    if (!errors) {
-      setLoading(true);
+  const handleSubmit = () => {
+    setLoading(true);
 
-      isLoginType
-        ? signInWithEmailAndPassword(auth, state.email, state.password).finally(
-            () => setLoading(false)
-          )
-        : createUserWithEmailAndPassword(auth, state.email, state.password)
-            .then((data) => {
-              if (file) {
-                const storageRef = ref(storage, `images/${data.user.uid}`);
-                uploadBytes(storageRef, file);
-              }
-            })
-            .finally(() => setLoading(false));
-    }
+    isLoginType
+      ? signInWithEmailAndPassword(auth, state.email, state.password).finally(
+          () => setLoading(false)
+        )
+      : createUserWithEmailAndPassword(auth, state.email, state.password)
+          .then((data) => {
+            if (file) {
+              const storageRef = ref(storage, `images/${data.user.uid}`);
+              uploadBytes(storageRef, file);
+            }
+          })
+          .finally(() => setLoading(false));
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -85,7 +87,7 @@ export const useAuthType = () => {
     state,
     isLoginType,
     handleAuthType,
-    handleSubmit,
+    handleSubmit: validation,
     loading,
     errors,
     handleChange,
