@@ -5,7 +5,7 @@ import styles from "./Modal.module.css";
 
 const Modal: React.FC<ModalProps> = ({ children, className }) => {
   return createPortal(
-    <div className={styles.wrapper}>
+    <div className={styles.wrapper} onClick={(e) => e.stopPropagation()}>
       <div className={cn(styles.modal, className)}>{children}</div>
     </div>,
     document.body

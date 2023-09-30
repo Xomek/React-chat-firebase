@@ -31,7 +31,10 @@ const Channel: React.FC<ChannelProps> = ({ channel }) => {
           className={styles.trashIcon}
           src={TrashIcon}
           alt="trashIcon"
-          onClick={() => setConfirmDialog(true)}
+          onClick={(e) => {
+            e.stopPropagation();
+            setConfirmDialog(true);
+          }}
         />
       )}
 
@@ -39,7 +42,9 @@ const Channel: React.FC<ChannelProps> = ({ channel }) => {
         <ConfirmDialog
           close={() => setConfirmDialog(false)}
           cb={() => deleteChannel(channel.id)}
-        />
+        >
+          Удалить канал? {channel.name}
+        </ConfirmDialog>
       )}
     </div>
   );

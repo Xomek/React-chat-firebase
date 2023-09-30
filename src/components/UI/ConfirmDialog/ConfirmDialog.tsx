@@ -15,7 +15,7 @@ const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
   };
   return (
     <Modal>
-      {children || <div className={styles.text}>Вы уверены?</div>}
+      {<div className={styles.text}>{children || "Вы уверены?"}</div>}
 
       <div className={styles.buttons}>
         <Button onClick={handleOk}>{confirmText}</Button>

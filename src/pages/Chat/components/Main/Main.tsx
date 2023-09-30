@@ -12,7 +12,7 @@ import styles from "./Main.module.css";
 const Main: React.FC = () => {
   const { currentUser } = getAuth();
   const { selectedChannel } = useAppSelector((state) => state.chat);
-  const { data, isLoading, refetch } = useGetChannelMessagesQuery(
+  const { data, refetch, isLoading } = useGetChannelMessagesQuery(
     selectedChannel?.id
   );
 

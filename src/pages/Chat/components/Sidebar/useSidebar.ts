@@ -1,6 +1,6 @@
 import {
-  useGetChannelsQuery,
   useCreateChannelMutation,
+  useGetChannelsQuery,
 } from "api/Chat/Chat.api";
 import { getAuth, signOut } from "firebase/auth";
 import { query, collection, onSnapshot } from "firebase/firestore";
@@ -29,10 +29,8 @@ export const useSidebar = () => {
   }, []);
 
   useEffect(() => {
-    if (data) {
-      if (!data.find((channel) => channel.id === selectedChannel?.id)) {
-        selectChannel(null);
-      }
+    if (!data?.find((channel) => channel.id === selectedChannel?.id)) {
+      selectChannel(null);
     }
   }, [data]);
 
