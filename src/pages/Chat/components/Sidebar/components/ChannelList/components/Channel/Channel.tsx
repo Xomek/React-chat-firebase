@@ -25,18 +25,22 @@ const Channel: React.FC<ChannelProps> = ({ channel }) => {
       onClick={() => selectChannel(channel)}
     >
       <Avatar className={styles.avatar} />
-      <div className={styles.name}>{channel.name}</div>
-      {channel.userId === currentUser?.uid && (
-        <img
-          className={styles.trashIcon}
-          src={TrashIcon}
-          alt="trashIcon"
-          onClick={(e) => {
-            e.stopPropagation();
-            setConfirmDialog(true);
-          }}
-        />
-      )}
+      <div className={styles.name}>
+        {channel.name}
+
+        {channel.userId === currentUser?.uid && (
+          <img
+            className={styles.trashIcon}
+            src={TrashIcon}
+            alt="trashIcon"
+            onClick={(e) => {
+              e.stopPropagation();
+              setConfirmDialog(true);
+            }}
+          />
+        )}
+        <div className={styles.hr} />
+      </div>
 
       {confirmDialog && (
         <ConfirmDialog

@@ -1,29 +1,44 @@
 .channel {
-  padding: 10px 20px;
-  border-bottom: 1px solid var(--primary);
-  color: var(--primary);
-  text-align: center;
-  letter-spacing: 1px;
-  font-size: 18px;
-  transition: all 0.2s;
+  padding: 0 20px;
   display: flex;
   align-items: center;
-
-  &:hover {
-    background-color: var(--primary-shadow);
-    color: #f3f2f1;
-    transition: all 0.2s;
-    cursor: pointer;
-  }
+  height: 60px;
+  cursor: pointer;
 }
 
 .active {
-  background-color: var(--primary-shadow);
-  color: #f3f2f1;
-  &:hover {
+  &.channel {
     background-color: var(--primary-shadow);
-    color: #f3f2f1;
   }
+
+  .name {
+    color: white;
+  }
+
+  .hr {
+    border-color: transparent;
+  }
+}
+
+.hr {
+  border-bottom: 1px solid var(--primary-shadow);
+  padding-top: 20px;
+  position: absolute;
+  bottom: -21px;
+  left: 0;
+  right: 0;
+}
+
+.name {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 18px;
+  letter-spacing: 0.8px;
+
+  flex: 1;
+  color: var(--primary);
 }
 
 .avatar {
@@ -31,13 +46,6 @@
   width: 35px;
   height: 35px;
   margin-right: 20px;
-}
-
-.name {
-  text-align: left;
-  flex: 1;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .trashIcon {

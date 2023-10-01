@@ -2,12 +2,14 @@ import { useState } from "react";
 import { getAuth } from "firebase/auth";
 import { useCreateNewMessageMutation } from "api/Chat/Chat.api";
 import { useAppSelector } from "store/hooks";
+import EmojiPicker from "emoji-picker-react";
 import styles from "./Textarea.module.css";
 
 const Textarea: React.FC = () => {
   const { currentUser } = getAuth();
   const { selectedChannel } = useAppSelector((state) => state.chat);
   const [newMessage, setNewMessage] = useState("");
+  const [pickerVisible, setPickerVisible] = useState(false);
   const [createNewMessage] = useCreateNewMessageMutation();
 
   const handleCreateMessage = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -24,6 +26,24 @@ const Textarea: React.FC = () => {
 
   return (
     <div className={styles.textAreaBox}>
+      <div className={styles.emojiPicker}>
+        {pickerVisible ? (
+          <EmojiPicker
+            onEmojiClick={(e) => {
+              setNewMessage((prevState) => prevState + e.emoji);
+              setPickerVisible((prevState) => !prevState);
+            }}
+          />
+        ) : (
+          <div
+            className={styles.picker}
+            onClick={() => setPickerVisible((prevState) => !prevState)}
+          >
+            😊
+          </div>
+        )}
+      </div>
+
       <input
         className={styles.textarea}
         value={newMessage}

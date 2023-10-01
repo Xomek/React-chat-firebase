@@ -3,7 +3,7 @@
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  padding: 10px 15px;
+  padding: 15px 20px;
   background-color: #f3f2f1;
   color: var(--primary);
   border-radius: 10px;
@@ -12,6 +12,7 @@
 }
 
 .text {
+  font-size: 20px;
   align-self: flex-end;
 }
 
@@ -23,7 +24,7 @@
 }
 
 .date {
-  font-size: 12px;
-  margin-bottom: 3px;
+  font-size: 14px;
+  margin-bottom: 5px;
   color: var(--primary-shadow);
 }
