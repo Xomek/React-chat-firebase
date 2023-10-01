@@ -1,7 +1,9 @@
 .textAreaBox {
+  border-top: 1px solid #f3f2f1;
   position: relative;
-  padding: 20px;
+  padding: 55px 20px 20px 20px;
   width: 100%;
+  background-color: #7775e6;
 }
 
 .textarea {
@@ -20,8 +22,8 @@
 
 .picker {
   position: absolute;
-  top: -30px;
-  left: 5px;
+  top: 5px;
+  left: 20px;
   border-radius: 50%;
   cursor: pointer;
   font-size: 30px;
@@ -29,5 +31,6 @@
 
 .emojiPicker {
   position: absolute;
-  bottom: 100%;
+  bottom: calc(100% + 5px);
+  left: 20px;
 }

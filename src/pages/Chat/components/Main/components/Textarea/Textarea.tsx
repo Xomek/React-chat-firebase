@@ -26,24 +26,23 @@ const Textarea: React.FC = () => {
 
   return (
     <div className={styles.textAreaBox}>
+      <div
+        className={styles.picker}
+        onClick={() => setPickerVisible((prevState) => !prevState)}
+      >
+        😊
+      </div>
+
       <div className={styles.emojiPicker}>
-        {pickerVisible ? (
+        {pickerVisible && (
           <EmojiPicker
             onEmojiClick={(e) => {
               setNewMessage((prevState) => prevState + e.emoji);
               setPickerVisible((prevState) => !prevState);
             }}
           />
-        ) : (
-          <div
-            className={styles.picker}
-            onClick={() => setPickerVisible((prevState) => !prevState)}
-          >
-            😊
-          </div>
         )}
       </div>
-
       <input
         className={styles.textarea}
         value={newMessage}
