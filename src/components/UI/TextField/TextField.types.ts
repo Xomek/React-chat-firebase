@@ -1,4 +1,3 @@
-export interface TextFieldProps
-  extends React.InputHTMLAttributes<HTMLInputElement> {
+export interface TextFieldProps extends React.ComponentProps<"input"> {
   error?: string;
 }

@@ -47,9 +47,8 @@ const Channel: React.FC<ChannelProps> = ({ channel }) => {
         <ConfirmDialog
           close={() => setConfirmDialog(false)}
           cb={() => deleteChannel(channel.id)}
-        >
-          Удалить канал? {channel.name}
-        </ConfirmDialog>
+          title={`Удалить канал? ${channel.name}`}
+        />
       )}
     </div>
   );

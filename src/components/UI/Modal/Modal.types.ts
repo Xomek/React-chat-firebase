@@ -1,5 +1,5 @@
 export interface ModalProps {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   className?: string;
-  title?: any;
+  title?: string | React.ReactNode;
 }

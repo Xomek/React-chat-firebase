@@ -1,7 +1,7 @@
 import cn from "classnames";
 import styles from "./Button.module.css";
 
-const Button: React.FC<React.ButtonHTMLAttributes<HTMLButtonElement>> = ({
+const Button: React.FC<React.ComponentProps<"button">> = ({
   children,
   className,
   ...props

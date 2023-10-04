@@ -30,4 +30,6 @@
   margin-bottom: 10px;
   text-align: center;
   color: #323232;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
