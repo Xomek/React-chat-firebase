@@ -28,19 +28,20 @@ const Channel: React.FC<ChannelProps> = ({ channel }) => {
       <div className={styles.name}>
         {channel.name}
 
-        {channel.userId === currentUser?.uid && (
-          <img
-            className={styles.trashIcon}
-            src={TrashIcon}
-            alt="trashIcon"
-            onClick={(e) => {
-              e.stopPropagation();
-              setConfirmDialog(true);
-            }}
-          />
-        )}
         <div className={styles.hr} />
       </div>
+
+      {channel.userId === currentUser?.uid && (
+        <img
+          className={styles.trashIcon}
+          src={TrashIcon}
+          alt="trashIcon"
+          onClick={(e) => {
+            e.stopPropagation();
+            setConfirmDialog(true);
+          }}
+        />
+      )}
 
       {confirmDialog && (
         <ConfirmDialog

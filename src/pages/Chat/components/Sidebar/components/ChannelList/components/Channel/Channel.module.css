@@ -1,6 +1,8 @@
 .channel {
   padding: 0 20px;
-  display: flex;
+  display: grid;
+  gap: 20px;
+  grid-template-columns: 35px 1fr 20px;
   align-items: center;
   height: 60px;
   cursor: pointer;
@@ -31,21 +33,17 @@
 
 .name {
   position: relative;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   font-size: 18px;
   letter-spacing: 0.8px;
-
-  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   color: var(--primary);
 }
 
 .avatar {
-  flex-shrink: 0;
   width: 35px;
   height: 35px;
-  margin-right: 20px;
 }
 
 .trashIcon {

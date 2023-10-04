@@ -63,3 +63,16 @@
     transform: rotate(90deg);
   }
 }
+
+.createChannelInput {
+  margin-bottom: 10px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  > button {
+    width: 100%;
+  }
+}

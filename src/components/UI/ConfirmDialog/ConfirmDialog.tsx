@@ -8,15 +8,14 @@ const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
   denyText = "Нет",
   cb,
   close,
+  ...props
 }) => {
   const handleOk = () => {
     cb();
     close();
   };
   return (
-    <Modal>
-      {<div className={styles.text}>{children || "Вы уверены?"}</div>}
-
+    <Modal title={children || "Вы уверены?"} {...props}>
       <div className={styles.buttons}>
         <Button onClick={handleOk}>{confirmText}</Button>
         <Button onClick={close}>{denyText}</Button>

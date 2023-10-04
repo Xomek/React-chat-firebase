@@ -19,7 +19,9 @@ export const useSidebar = () => {
   const { selectedChannel } = useAppSelector((state) => state.chat);
   const { data, isLoading, refetch } = useGetChannelsQuery();
   const [createChannel] = useCreateChannelMutation();
+  const [newChannelName, setNewChannelName] = useState("");
   const [url, setUrl] = useState("");
+  const [createModalVisible, setCreateModalVisible] = useState(false);
 
   useEffect(() => {
     const q = query(collection(db, "channels"));
@@ -42,10 +44,12 @@ export const useSidebar = () => {
   }, [currentUser]);
 
   const handleCreateChannel = () => {
-    createChannel({
-      name: Math.floor(Math.random() * 1000000),
-      userId: currentUser?.uid,
-    });
+    if (newChannelName) {
+      createChannel({
+        name: newChannelName,
+        userId: currentUser?.uid,
+      });
+    }
   };
 
   const handleSignOut = async () => {
@@ -60,5 +64,12 @@ export const useSidebar = () => {
     currentUser,
     handleCreateChannel,
     handleSignOut,
+    createModalVisible,
+    handleCreateVisible: () => {
+      setNewChannelName("");
+      setCreateModalVisible((prevState) => !prevState);
+    },
+    setNewChannelName,
+    newChannelName,
   };
 };

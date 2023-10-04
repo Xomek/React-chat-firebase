@@ -1,12 +1,26 @@
-import { Button, CircularProgress } from "components/UI";
-import { Avatar } from "components/UI";
+import {
+  Avatar,
+  ConfirmDialog,
+  TextField,
+  Button,
+  CircularProgress,
+} from "components/UI";
 import ChannelList from "./components/ChannelList/ChannelList";
 import { useSidebar } from "./useSidebar";
 import styles from "./Sidebar.module.css";
 
 const Sidebar: React.FC = () => {
-  const { isLoading, handleCreateChannel, handleSignOut, url, currentUser } =
-    useSidebar();
+  const {
+    isLoading,
+    handleCreateVisible,
+    handleSignOut,
+    url,
+    currentUser,
+    createModalVisible,
+    handleCreateChannel,
+    setNewChannelName,
+    newChannelName,
+  } = useSidebar();
 
   return (
     <div className={styles.sidebar}>
@@ -16,7 +30,7 @@ const Sidebar: React.FC = () => {
       </div>
 
       <div className={styles.actions}>
-        <Button onClick={handleCreateChannel}>
+        <Button onClick={handleCreateVisible}>
           <div className={styles.plusIcon} />
         </Button>
       </div>
@@ -30,6 +44,21 @@ const Sidebar: React.FC = () => {
       )}
 
       <Button onClick={handleSignOut}>Выход</Button>
+
+      {createModalVisible && (
+        <ConfirmDialog
+          title="Создание нового канала"
+          cb={handleCreateChannel}
+          close={handleCreateVisible}
+        >
+          <TextField
+            className={styles.createChannelInput}
+            placeholder="Название канала"
+            onChange={(e) => setNewChannelName(e.target.value)}
+            value={newChannelName}
+          />
+        </ConfirmDialog>
+      )}
     </div>
   );
 };
