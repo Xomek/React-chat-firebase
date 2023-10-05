@@ -8,6 +8,9 @@ import {
 import ChannelList from "./components/ChannelList/ChannelList";
 import { useSidebar } from "./useSidebar";
 import styles from "./Sidebar.module.css";
+import AnimationButton from "components/UI/AnimationButton/AnimationButton";
+import { useAnimation } from "hooks/useAnimation";
+import { useRef } from "react";
 
 const Sidebar: React.FC = () => {
   const {
@@ -21,18 +24,20 @@ const Sidebar: React.FC = () => {
     setNewChannelName,
     newChannelName,
   } = useSidebar();
+  const divRef = useRef<HTMLDivElement | null>(null);
+  const animationClick = useAnimation(divRef);
 
   return (
-    <div className={styles.sidebar}>
+    <div ref={divRef} className={styles.sidebar} onClick={animationClick}>
       <div className={styles.top}>
         <Avatar className={styles.avatar} imageUrl={url} />
         <div className={styles.email}>{currentUser?.email}</div>
       </div>
 
       <div className={styles.actions}>
-        <Button onClick={handleCreateVisible}>
+        <AnimationButton onClick={handleCreateVisible}>
           <div className={styles.plusIcon} />
-        </Button>
+        </AnimationButton>
       </div>
 
       {isLoading ? (
